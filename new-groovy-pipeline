@@ -3,14 +3,14 @@ pipeline{
  stages{
  stage("git-pull"){
  steps{
- sh 'sudo apt-get install update -y'
+ sh 'sudo apt-get update -y'
  sh 'sudo apt-get install git -y'
- git branch: 'main', credentialsId: 'git-jenkinskey', url: 'git@github.com:usertan123/student-ui.git'
+ git branch: 'main', credentialsId: 'gitnew', url: 'git@github.com:usertan123/student-ui.git'
  }
  }
  stage("Maven-Build"){
  steps{
- sh 'sudo apt-get install update -y'
+ sh 'sudo apt-get update -y'
  sh 'sudo apt-get install maven curl unzip -y'
  sh 'mvn clean package'
  }
