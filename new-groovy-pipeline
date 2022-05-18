@@ -5,7 +5,7 @@ pipeline{
  steps{
  sh 'sudo apt-get install update -y'
  sh 'sudo apt-get install git -y'
- git credentialsId: 'git-jenkinskey', url: 'git@github.com:usertan123/student-ui.git'
+ git branch: 'main', credentialsId: 'git-jenkinskey', url: 'git@github.com:usertan123/student-ui.git'
  }
  }
  stage("Maven-Build"){
