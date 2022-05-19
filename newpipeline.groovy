@@ -15,22 +15,22 @@ pipeline{
  sh 'mvn clean package'
  }
  }
-            // stage("push-artifact"){
-            // steps{
-            // sh 'curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"'
-            // sh 'unzip awscliv2.zip'
-            // sh 'sudo ./aws/install'
-            // sh 'aws s3 sync **/*.war s3://dev-artifact'
-            // }
-            // stage("Dev-Deployment"){
-            // steps{
-            // sh 'ssh -i ec2.pem ubuntu@'
-            // sh 'curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"'
-            // sh 'unzip awscliv2.zip'
-            // sh 'sudo ./aws/install'
-            // sh 'aws s3 sync s3://dev-artifact/**.war /opt/tomcat/webapps/' 
-            // sh './opt/tomcat/bin/startup.sh' 
-            // }
-            // }
+     stage("push-artifact"){
+     steps{
+     sh 'curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"'
+     sh 'unzip awscliv2.zip'
+     sh 'sudo ./aws/install'
+     sh 'aws s3 sync **/*.war s3://dev-artifact'
+     }
+     stage("Dev-Deployment"){
+     steps{
+     sh 'ssh -i ec2.pem ubuntu@'
+     sh 'curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"'
+     sh 'unzip awscliv2.zip'
+     sh 'sudo ./aws/install'
+     sh 'aws s3 sync s3://dev-artifact/**.war /opt/tomcat/webapps/' 
+     sh './opt/tomcat/bin/startup.sh' 
+     }
+     }
  }
 }
