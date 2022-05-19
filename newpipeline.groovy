@@ -22,6 +22,8 @@ pipeline{
      sh 'sudo ./aws/install'
      sh 'aws s3 sync **/*.war s3://dev-artifact'
      }
+ }
+     
      stage("Dev-Deployment"){
      steps{
      sh 'ssh -i ec2.pem ubuntu@'
@@ -32,5 +34,4 @@ pipeline{
      sh './opt/tomcat/bin/startup.sh' 
      }
      }
- }
 }
