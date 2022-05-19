@@ -20,19 +20,19 @@ pipeline{
 //  sh 'curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"'
 //  sh 'unzip awscliv2.zip'
 //  sh 'sudo ./aws/install'
-
- sh 'aws s3 cp /var/lib/jenkins/workspace/student.app/target/studentapp-2.2-SNAPSHOT.war s3://new-artifacts-123'
+ sh 'sudo mv /var/lib/jenkins/workspace/student.app/target/studentapp-2.2-SNAPSHOT.war /home/ubuntu/student-$(BUILD_ID).war'
+ sh 'aws s3 cp /home/ubuntu/student-$(BUILD_ID).war s3://new-artifacts-123'
  }
  }
- stage("Dev-Deployment"){
- steps{
- sh 'ssh -i ec2.pem ubuntu@'
- sh 'curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"'
- sh 'unzip awscliv2.zip'
- sh 'sudo ./aws/install'
- sh 'aws s3 sync s3://dev-artifact/**.war /opt/tomcat/webapps/' 
- sh './opt/tomcat/bin/startup.sh' 
- }
- }
+//  stage("Dev-Deployment"){
+//  steps{
+//  sh 'ssh -i ec2.pem ubuntu@'
+//  sh 'curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"'
+//  sh 'unzip awscliv2.zip'
+//  sh 'sudo ./aws/install'
+//  sh 'aws s3 sync s3://dev-artifact/**.war /opt/tomcat/webapps/' 
+//  sh './opt/tomcat/bin/startup.sh' 
+//  }
+//  }
  }
 }
