@@ -27,7 +27,7 @@ pipeline{
   stage("Dev-Deployment"){
   steps{
       withCredentials([sshUserPrivateKey(credentialsId: 'gitnew', keyFileVariable: 'tomcat')]) {
-  sh 'ssh -i ${tomcat} ubuntu@3.7.68.98'
+  sh 'ssh -i ${tomcat}  -o StrictHostKeyChecking=no ubuntu@3.7.68.98'
   sh 'curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"'
   sh 'unzip awscliv2.zip'
   sh 'sudo ./aws/install'
