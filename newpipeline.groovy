@@ -32,6 +32,9 @@ pipeline{
   aws s3 cp s3://dev-artifact-maven/student-${BUILD_ID}.war
   curl -O https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.78/bin/apache-tomcat-8.5.78.tar.gz
   sudo tar -xvf apache-tomcat-8.5.78.tar.gz -C /opt/
+  sudo sh /opt/apache-tomcat-8.5.78/bin/shutdown.sh
+  sudo cp -rv student-${BUILD_ID}.war studentapp.war
+  sudo cp -rv studentapp.war /opt/apache-tomcat-8.5.78/webapps/
   sudo sh /opt/apache-tomcat-8.5.78/bin/startup.sh
   '''
       } 
