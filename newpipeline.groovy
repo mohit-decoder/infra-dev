@@ -36,6 +36,7 @@ pipeline{
                 sudo cp -rv student-${BUILD_ID}.war studentapp.war
                 sudo cp -rv studentapp.war /opt/apache-tomcat-8.5.78/webapps/
                 sudo sh /opt/apache-tomcat-8.5.78/bin/startup.sh
+                '''
       } 
   }
   }
