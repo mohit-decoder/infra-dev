@@ -27,12 +27,13 @@ pipeline{
   stage("Dev-Deployment"){
   steps{
      withCredentials([sshUserPrivateKey(credentialsId: 'tomcat', keyFileVariable: 'tomcat')]) {
-  sh 'ssh -i ${tomcat}  -o StrictHostKeyChecking=no ubuntu@3.7.68.98'
-  sh 'curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"'
-  sh 'unzip awscliv2.zip'
-  sh 'sudo ./aws/install'
-  sh 'aws s3 sync s3://dev-artifact/**.war /opt/tomcat/webapps/' 
-  sh './opt/tomcat/bin/startup.sh'
+         sh'''
+  ssh -i ${tomcat}  -o StrictHostKeyChecking=no ubuntu@3.7.68.98<<EOF
+  aws s3 cp s3://dev-artifact-maven/student-${BUILD_ID}.war
+  curl -O https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.78/bin/apache-tomcat-8.5.78.tar.gz
+  sudo tar -xvf apache-tomcat-8.5.78.tar.gz -C /opt/
+  sudo sh /opt/apache-tomcat-8.5.78/bin/startup.sh
+  '''
       } 
   }
   }
