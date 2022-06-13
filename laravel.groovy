@@ -10,9 +10,8 @@ pipeline{
      stage("Dev-Deployment"){
       steps{
         withCredentials([sshUserPrivateKey(credentialsId: 'laravel', keyFileVariable: 'laravel')]) {
-
          sh'''
-         ssh -i ${laravel}  -o StrictHostKeyChecking=no ubuntu@34.222.165.204<<EOF
+         ssh -i ${laravel}  -o StrictHostKeyChecking=no ubuntu@52.39.143.121<<EOF
          sudo apt-get update
          sudo add-apt-repository ppa:ondrej/php
          sudo apt-get install -y php7.2-cli php7.2-mysql php7.2-fpm php7.2-xml php7.2-curl php7.1-mcrypt php7.2-mbstring
