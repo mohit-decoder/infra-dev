@@ -7,13 +7,6 @@ pipeline{
         sh 'sudo apt-get install git -y'
        }
      }
-     stage("Maven-Build"){
-      steps{
-        sh 'sudo apt-get update -y'
-        sh 'sudo apt-get install maven curl unzip -y'
-        sh 'mvn clean package'
- }
- }
      stage("Dev-Deployment"){
       steps{
         withCredentials([sshUserPrivateKey(credentialsId: 'laravel', keyFileVariable: 'laravel')]) {
