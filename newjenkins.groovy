@@ -22,7 +22,7 @@ pipeline{
 //  sh 'unzip awscliv2.zip'
 //  sh 'sudo ./aws/install'
  sh 'sudo mv /var/lib/jenkins/workspace/student_app/target/studentapp-2.2-SNAPSHOT.war /home/ubuntu/student-${BUILD_ID}.war'
- sh 'aws s3 cp /home/ubuntu/student-${BUILD_ID}.war s3://new-artifacts-123'
+ sh 'aws s3 cp /home/ubuntu/student-${BUILD_ID}.war s3://new-bucket-artifact'
  }
  }
   stage("Dev-Deployment"){
@@ -30,7 +30,7 @@ pipeline{
      withCredentials([sshUserPrivateKey(credentialsId: 'tomcat', keyFileVariable: 'tomcat')]) {
          sh'''
   ssh -i ${tomcat}  -o StrictHostKeyChecking=no ubuntu@3.7.68.98<<EOF
-    aws s3 cp s3://new-artifacts-123/student-${BUILD_ID}.war .
+    aws s3 cp s3://new-bucket-artifact/student-${BUILD_ID}.war .
                 curl -O https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.78/bin/apache-tomcat-8.5.78.tar.gz
                 sudo tar -xvf apache-tomcat-8.5.78.tar.gz -C /opt/
                 sudo sh /opt/apache-tomcat-8.5.78/bin/shutdown.sh
