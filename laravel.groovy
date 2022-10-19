@@ -17,7 +17,7 @@ pipeline{
          sudo apt-get install -y php7.2-cli php7.2-mysql php7.2-fpm php7.2-xml php7.2-curl php7.1-mcrypt php7.2-mbstring
          php -v
          sudo apt-get install mysql-server -y
-         sudo apt-get install nginx-y
+         sudo apt-get install nginx -y
          sudo apt-get install git 
          sudo apt-get install zip unzip
          git clone https://github.com/usertan123/aws-laravel.git html
