@@ -28,7 +28,7 @@ pipeline{
          cp .env.example .env
          php artisan key:generate
          cd /etc/nginx/sites-available
-         sudo curl -O https://laravel-sites-available.s3.us-west-2.amazonaws.com/sites-available.txt 
+         sudo curl -O https://s3.ap-south-1.amazonaws.com/sites-available.txt/sites-available.txt
          sudo mv sites-available.txt default
          cat default
          cd /var/www/
